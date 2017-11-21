@@ -4,7 +4,8 @@
     <color name="colorPrimaryDark">#222222</color>
     <color name="colorAccent">#FF4081</color>
     
-    <color name="colorBottomAndTopNavigationBar">#222222</color>
+    <color name="colorTopNavigationBar">#222222</color>
+    <color name="colorBottomNavigationBar">#000000</color>
     <color name="tab_checked">#d20202</color>
     <color name="tab_unchecked">#D3D3D3</color>
 

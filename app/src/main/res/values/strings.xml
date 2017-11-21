@@ -12,4 +12,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="see_all">SEE ALL</string>
+    <string name="characters">CHARACTERS</string>
+    <string name="comics">COMICS</string>
+    <string name="events">EVENTS</string>
 </resources>

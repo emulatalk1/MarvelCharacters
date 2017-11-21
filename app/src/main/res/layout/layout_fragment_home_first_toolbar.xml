@@ -5,7 +5,7 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:background="@color/colorBottomAndTopNavigationBar"
+        android:background="@color/colorTopNavigationBar"
         android:paddingLeft="16dp"
         android:paddingRight="16dp">
 
@@ -48,7 +48,7 @@
                 android:layout_height="match_parent"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:background="@color/colorBottomAndTopNavigationBar"
+                android:background="@color/colorTopNavigationBar"
                 android:gravity="center"
                 android:text="@string/sign_in"
                 android:textColor="@color/white"

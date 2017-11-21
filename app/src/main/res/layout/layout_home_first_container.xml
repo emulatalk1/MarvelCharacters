@@ -10,21 +10,20 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp">
+            android:layout_height="190dp">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
                 android:gravity="center"
                 android:text="This is image slider container." />
 
         </FrameLayout>
 
+        <!--Characters container-->
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="32dp"
+            android:layout_height="42dp"
             android:paddingRight="16dp"
             android:paddingLeft="16dp"
             android:background="@color/gray">
@@ -36,7 +35,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
-                android:text="CHARACTERS"
+                android:text="@string/characters"
                 android:textColor="@color/white"
 
                 android:textStyle="bold" />
@@ -45,28 +44,27 @@
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/textView"
-                android:layout_alignBottom="@+id/textView"
-                android:layout_toLeftOf="@+id/imageView"
-                android:layout_toStartOf="@+id/imageView"
-                android:text="SEE ALL"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/imageView2"
+                android:layout_toStartOf="@+id/imageView2"
+                android:text="@string/see_all"
                 android:textColor="@color/white"
-                android:textSize="10sp"
+                android:textSize="12sp"
                 android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
+                android:layout_alignParentTop="true"
                 app:srcCompat="@drawable/ic_right" />
 
             <ImageView
                 android:id="@+id/imageView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignTop="@+id/imageView"
@@ -77,42 +75,151 @@
         </RelativeLayout>
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/colorTopNavigationBar">
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="170dp"
+                android:layout_height="210dp"
+                android:gravity="center"
+                android:text="This is characters container."
+                android:textColor="@color/white"/>
+
+        </FrameLayout>
+
+        <!--Comics container-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:paddingRight="16dp"
+            android:paddingLeft="16dp"
+            android:background="@color/gray">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:text="@string/comics"
+                android:textColor="@color/white"
+
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/imageView4"
+                android:layout_toStartOf="@+id/imageView4"
+                android:text="@string/see_all"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:gravity="center"
-                android:text="This is characters container." />
+                app:srcCompat="@drawable/ic_right" />
 
-        </FrameLayout>
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@+id/imageView3"
+                android:layout_marginEnd="7dp"
+                android:layout_marginRight="7dp"
+                app:srcCompat="@drawable/ic_right" />
 
+        </RelativeLayout>
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="170dp">
+            android:layout_height="210dp"
+            android:background="@color/colorTopNavigationBar">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="This is comics container." />
+                android:text="This is comics container."
+                android:textColor="@color/white"/>
 
         </FrameLayout>
 
+        <!--Events container-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:paddingRight="16dp"
+            android:paddingLeft="16dp"
+            android:background="@color/gray">
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:text="@string/events"
+                android:textColor="@color/white"
+
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/imageView6"
+                android:layout_toStartOf="@+id/imageView6"
+                android:text="@string/see_all"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                app:srcCompat="@drawable/ic_right" />
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@+id/imageView5"
+                android:layout_marginEnd="7dp"
+                android:layout_marginRight="7dp"
+                app:srcCompat="@drawable/ic_right" />
+
+        </RelativeLayout>
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="170dp">
+            android:layout_height="210dp"
+            android:background="@color/colorTopNavigationBar">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="This is events container." />
+                android:text="This is events container."
+                android:textColor="@color/white"/>
 
         </FrameLayout>
-
     </LinearLayout>
 
 </ScrollView>
