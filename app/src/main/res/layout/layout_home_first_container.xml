@@ -9,6 +9,7 @@
         android:orientation="vertical">
 
         <FrameLayout
+            android:id="@+id/frame_image_slider"
             android:layout_width="match_parent"
             android:layout_height="190dp">
 
@@ -39,6 +40,19 @@
                 android:textColor="@color/white"
 
                 android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_totalCharacters"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/textView"
+                android:layout_alignBottom="@+id/textView"
+                android:layout_marginLeft="@dimen/stroke_width_inner"
+                android:layout_toEndOf="@+id/textView"
+                android:layout_toRightOf="@+id/textView"
+                android:text="(12)"
+                android:textColor="@color/white"
+                android:textSize="13sp" />
 
             <TextView
                 android:id="@+id/textView2"
@@ -74,16 +88,16 @@
 
         </RelativeLayout>
         <FrameLayout
+            android:id="@+id/frame_characters_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="220dp"
             android:background="@color/colorTopNavigationBar">
-
-            <TextView
+            <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
-                android:layout_height="210dp"
-                android:gravity="center"
-                android:text="This is characters container."
-                android:textColor="@color/white"/>
+                android:layout_height="match_parent"
+                android:id="@+id/recylerView_characters">
+
+            </android.support.v7.widget.RecyclerView>
 
         </FrameLayout>
 
@@ -141,8 +155,9 @@
 
         </RelativeLayout>
         <FrameLayout
+            android:id="@+id/frame_comics_container"
             android:layout_width="match_parent"
-            android:layout_height="210dp"
+            android:layout_height="220dp"
             android:background="@color/colorTopNavigationBar">
 
             <TextView
@@ -208,8 +223,9 @@
 
         </RelativeLayout>
         <FrameLayout
+            android:id="@+id/frame_events_container"
             android:layout_width="match_parent"
-            android:layout_height="210dp"
+            android:layout_height="220dp"
             android:background="@color/colorTopNavigationBar">
 
             <TextView

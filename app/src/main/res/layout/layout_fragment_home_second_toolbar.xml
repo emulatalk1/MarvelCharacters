@@ -36,7 +36,7 @@
                 android:layout_toEndOf="@+id/bt_backHome"
                 android:layout_toRightOf="@+id/bt_backHome"
                 android:background="@drawable/background_button_unclicked"
-                android:text="women"
+                android:text="@string/chars"
                 android:textColor="@color/white"
                 android:textStyle="bold" />
 
@@ -48,7 +48,7 @@
                 android:layout_toEndOf="@+id/bt_womenHeroes"
                 android:layout_toRightOf="@+id/bt_womenHeroes"
                 android:background="@drawable/background_button_unclicked"
-                android:text="Villain"
+                android:text="@string/comics"
                 android:textColor="@color/white"
                 android:textStyle="bold" />
 
@@ -60,7 +60,7 @@
                 android:layout_toEndOf="@+id/bt_topVillains"
                 android:layout_toRightOf="@+id/bt_topVillains"
                 android:background="@drawable/background_button_unclicked"
-                android:text="top"
+                android:text="@string/events"
                 android:textColor="@color/white"
                 android:textStyle="bold" />
 

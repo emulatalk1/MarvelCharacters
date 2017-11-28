@@ -86,11 +86,6 @@ public class HomeSecondFragment extends Fragment implements View.OnClickListener
                 replace(HomeSecondContainer3Fragment.newInstance());
                 changeBackgroundTopNavigation(btContainer3);
                 break;
-
-//            case R.id.bt_topHeroes:
-//                replace(HomeSecondContainer3Fragment.newInstance());
-//                changeBackgroundTopNavigation(btContainer3);
-//                break;
         }
     }
 
