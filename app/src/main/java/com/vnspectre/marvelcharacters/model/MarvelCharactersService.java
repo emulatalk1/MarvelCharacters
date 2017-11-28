@@ -12,7 +12,7 @@ import retrofit2.http.GET;
 
 public interface MarvelCharactersService {
 
-    @GET("/v1/public/characters?ts=123&apikey=b6f01aa9b460bd319570511845bbc4d4&hash=d254d25eff654ef5a2c9b5d099e67de6")
+    @GET("characters")
     Call<MarvelResponse<CharactersDto>> getCharacters();
 
 }

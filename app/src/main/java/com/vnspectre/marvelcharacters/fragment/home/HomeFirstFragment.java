@@ -63,7 +63,7 @@ public class HomeFirstFragment extends Fragment implements OnClickListener, Home
         RecyclerView charactersRecyclerView = homeFirst.findViewById(R.id.recylerView_characters);
         charactersRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
-        marvelService = ApiUtils.getMCService();
+        marvelService = ApiUtils.getMarvelCharacterService();
         mAdapter = new HomeFirstCharactersAdapter(new ArrayList<CharactersDto>(0), this);
 
         charactersRecyclerView.setAdapter(mAdapter);
