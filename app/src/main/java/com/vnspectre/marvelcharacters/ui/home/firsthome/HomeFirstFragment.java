@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.vnspectre.marvelcharacters.R;
 import com.vnspectre.marvelcharacters.activity.MainActivity;
+import com.vnspectre.marvelcharacters.model.marvel.entities.CharacterDto;
 import com.vnspectre.marvelcharacters.ui.home.secondhome.HomeSecondFragment;
 import com.vnspectre.marvelcharacters.model.ApiUtils;
 import com.vnspectre.marvelcharacters.model.MarvelCharactersService;
@@ -27,12 +28,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HomeFirstFragment extends Fragment implements OnClickListener, HomeFirstCharactersAdapter.HomeFirstCharactersAdapterOnClickHandler {
+public class HomeFirstFragment extends Fragment implements OnClickListener, CharactersAdapter.Callback {
 
     private Button btTopHeroes;
     private TextView totalCharacters;
     private MarvelCharactersService marvelService;
-    private HomeFirstCharactersAdapter mAdapter;
+    private CharactersAdapter mAdapter;
 
     public HomeFirstFragment() {
     }
@@ -65,7 +66,8 @@ public class HomeFirstFragment extends Fragment implements OnClickListener, Home
         charactersRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
         marvelService = ApiUtils.getMarvelCharacterService();
-        mAdapter = new HomeFirstCharactersAdapter(new ArrayList<CharactersDto>(0), this);
+        mAdapter = new CharactersAdapter(new ArrayList<CharacterDto>(0));
+        mAdapter.setCallback(this);
 
         charactersRecyclerView.setAdapter(mAdapter);
 
@@ -103,7 +105,7 @@ public class HomeFirstFragment extends Fragment implements OnClickListener, Home
     }
 
     @Override
-    public void onClickCharacterAdapter(String selectedCharacterName) {
-        Toast.makeText(getContext(), selectedCharacterName + " selected", + Toast.LENGTH_SHORT).show();
+    public void onCharacterViewClick(String text) {
+        Toast.makeText(getContext(), text + " was clicked", Toast.LENGTH_SHORT).show();
     }
 }
