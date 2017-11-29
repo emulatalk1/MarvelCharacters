@@ -1,4 +1,4 @@
-package com.vnspectre.marvelcharacters.fragment.home;
+package com.vnspectre.marvelcharacters.ui.home.firsthome;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.vnspectre.marvelcharacters.R;
 import com.vnspectre.marvelcharacters.activity.MainActivity;
+import com.vnspectre.marvelcharacters.ui.home.secondhome.HomeSecondFragment;
 import com.vnspectre.marvelcharacters.model.ApiUtils;
 import com.vnspectre.marvelcharacters.model.MarvelCharactersService;
 import com.vnspectre.marvelcharacters.model.marvel.entities.CharactersDto;
@@ -26,7 +27,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HomeFirstFragment extends Fragment implements OnClickListener, HomeFirstCharactersAdapter.HomeFirstCharactersAdapterOnClickHandler{
+public class HomeFirstFragment extends Fragment implements OnClickListener, HomeFirstCharactersAdapter.HomeFirstCharactersAdapterOnClickHandler {
 
     private Button btTopHeroes;
     private TextView totalCharacters;

@@ -1,4 +1,4 @@
-package com.vnspectre.marvelcharacters.fragment.browser;
+package com.vnspectre.marvelcharacters.ui.discover;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,10 +8,10 @@ import android.view.ViewGroup;
 
 import com.vnspectre.marvelcharacters.R;
 
-public class BrowserFragment extends Fragment {
+public class DiscoverFragment extends Fragment {
 
-    public static BrowserFragment newInstance() {
-        BrowserFragment fragment = new BrowserFragment();
+    public static DiscoverFragment newInstance() {
+        DiscoverFragment fragment = new DiscoverFragment();
         return fragment;
     }
 
@@ -24,7 +24,7 @@ public class BrowserFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_browser, container, false);
+        return inflater.inflate(R.layout.fragment_discover, container, false);
     }
     
 }

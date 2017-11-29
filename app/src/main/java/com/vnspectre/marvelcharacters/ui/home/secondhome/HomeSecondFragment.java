@@ -1,7 +1,6 @@
-package com.vnspectre.marvelcharacters.fragment.home;
+package com.vnspectre.marvelcharacters.ui.home.secondhome;
 
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;

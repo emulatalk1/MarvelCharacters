@@ -8,16 +8,13 @@ import android.support.design.widget.BottomNavigationView.OnNavigationItemSelect
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 
 import com.vnspectre.marvelcharacters.R;
-import com.vnspectre.marvelcharacters.fragment.browser.BrowserFragment;
-import com.vnspectre.marvelcharacters.fragment.discover.DiscoverFragment;
-import com.vnspectre.marvelcharacters.fragment.home.HomeFirstFragment;
-import com.vnspectre.marvelcharacters.fragment.home.HomeSecondContainer3Fragment;
-import com.vnspectre.marvelcharacters.fragment.home.HomeSecondFragment;
-import com.vnspectre.marvelcharacters.fragment.mylibrary.MyLibraryFragment;
+import com.vnspectre.marvelcharacters.ui.browser.BrowserFragment;
+import com.vnspectre.marvelcharacters.ui.discover.DiscoverFragment;
+import com.vnspectre.marvelcharacters.ui.home.firsthome.HomeFirstFragment;
+import com.vnspectre.marvelcharacters.ui.mylibrary.MyLibraryFragment;
 import com.vnspectre.marvelcharacters.utils.BottomNavigationViewHelper;
 import com.vnspectre.marvelcharacters.utils.FragNavController;
 

@@ -1,4 +1,4 @@
-package com.vnspectre.marvelcharacters.fragment.home;
+package com.vnspectre.marvelcharacters.ui.home.firsthome;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -46,9 +46,7 @@ public class HomeFirstCharactersAdapter extends RecyclerView.Adapter<HomeFirstCh
 
     @Override
     public void onBindViewHolder(CharacterViewHolder holder, int position) {
-        CharacterDto character = mListCharacters.get(position);
-        holder.txtCharacterName.setText(character.getName());
-        Picasso.with(holder.imgCharacter.getContext()).load(character.getThumbnail().getImageUrl(MarvelImage.Size.PORTRAIT_INCREDIBLE)).into(holder.imgCharacter);
+        holder.onBind(position);
     }
 
     @Override
@@ -73,6 +71,18 @@ public class HomeFirstCharactersAdapter extends RecyclerView.Adapter<HomeFirstCh
         @Override
         public void onClick(View v) {
             mClickHandler.onClickCharacterAdapter(mListCharacters.get(getAdapterPosition()).getName());
+        }
+
+        protected void clear() {
+            imgCharacter.setImageDrawable(null);
+            txtCharacterName.setText("");
+        }
+
+        public void onBind(int position) {
+            final CharacterDto characterDto = mListCharacters.get(position);
+            clear();
+            Picasso.with(imgCharacter.getContext()).load(characterDto.getThumbnail().getImageUrl(MarvelImage.Size.PORTRAIT_INCREDIBLE)).into(imgCharacter);
+            txtCharacterName.setText(characterDto.getName());
         }
     }
 

@@ -1,4 +1,4 @@
-package com.vnspectre.marvelcharacters.fragment.home;
+package com.vnspectre.marvelcharacters.ui.home.secondhome;
 
 
 import android.os.Bundle;
@@ -12,15 +12,15 @@ import com.vnspectre.marvelcharacters.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeSecondContainer1Fragment extends Fragment {
+public class HomeSecondContainer3Fragment extends Fragment {
 
 
-    public HomeSecondContainer1Fragment() {
+    public HomeSecondContainer3Fragment() {
         // Required empty public constructor
     }
 
-    public static HomeSecondContainer1Fragment newInstance() {
-        HomeSecondContainer1Fragment fragment = new HomeSecondContainer1Fragment();
+    public static HomeSecondContainer3Fragment newInstance() {
+        HomeSecondContainer3Fragment fragment = new HomeSecondContainer3Fragment();
         return fragment;
     }
 
@@ -28,7 +28,7 @@ public class HomeSecondContainer1Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home_second_container1, container, false);
+        return inflater.inflate(R.layout.fragment_home_second_container3, container, false);
     }
 
 }

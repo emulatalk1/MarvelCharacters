@@ -18,7 +18,7 @@ public class AuthInterceptor implements Interceptor {
 
     private final String publicKey;
     private final String privateKey;
-    private final com.vnspectre.marvelcharacters.model.marvel.TimeProvider timeProvider;
+    private final TimeProvider timeProvider;
     private final AuthHashGenerator authHashGenerator = new AuthHashGenerator();
 
     public AuthInterceptor(String publicKey, String privateKey, TimeProvider timeProvider) {
@@ -30,7 +30,7 @@ public class AuthInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
         String timestamp = String.valueOf(timeProvider.currentTimeMillis());
-        String hash = null;
+        String hash;
         hash = authHashGenerator.generateHash(timestamp, publicKey, privateKey);
         Request request = chain.request();
         HttpUrl url = request.url()

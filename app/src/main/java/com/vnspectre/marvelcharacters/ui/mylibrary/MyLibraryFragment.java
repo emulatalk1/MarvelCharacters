@@ -1,4 +1,4 @@
-package com.vnspectre.marvelcharacters.fragment.mylibrary;
+package com.vnspectre.marvelcharacters.ui.mylibrary;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
