@@ -1,4 +1,4 @@
-package com.vnspectre.marvelcharacters.data.network.marvelapi.entities;
+package com.vnspectre.marvelcharacters.data.network.marvelapi.model;
 
 /**
  * Created by Spectre on 11/27/17.

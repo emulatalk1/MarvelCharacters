@@ -12,13 +12,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.vnspectre.marvelcharacters.R;
-import com.vnspectre.marvelcharacters.data.network.marvelapi.entities.CharacterDto;
+import com.vnspectre.marvelcharacters.data.network.marvelapi.model.CharacterDto;
 import com.vnspectre.marvelcharacters.ui.base.BaseFragment;
 import com.vnspectre.marvelcharacters.ui.home.secondhome.HomeSecondFragment;
-import com.vnspectre.marvelcharacters.data.network.ApiUtils;
-import com.vnspectre.marvelcharacters.data.network.marvelapi.MarvelCharactersService;
-import com.vnspectre.marvelcharacters.data.network.marvelapi.entities.CharactersDto;
-import com.vnspectre.marvelcharacters.data.network.marvelapi.entities.MarvelResponse;
+import com.vnspectre.marvelcharacters.data.network.AppApiHelper;
+import com.vnspectre.marvelcharacters.data.network.marvelapi.MarvelService;
+import com.vnspectre.marvelcharacters.data.network.marvelapi.model.CharactersDto;
+import com.vnspectre.marvelcharacters.data.network.marvelapi.model.MarvelResponse;
 
 import java.util.ArrayList;
 
@@ -30,10 +30,9 @@ public class HomeFirstFragment extends BaseFragment implements OnClickListener, 
 
     private Button btTopHeroes;
     private TextView totalCharacters;
-    private MarvelCharactersService marvelService;
+    private MarvelService marvelService;
     private CharactersAdapter mAdapter;
     private RecyclerView charactersRecyclerView;
-//    private MainActivity mActivity;
 
     public HomeFirstFragment() {
     }
@@ -43,13 +42,6 @@ public class HomeFirstFragment extends BaseFragment implements OnClickListener, 
         return fragment;
     }
 
-//    @Override
-//    public void onAttach(Context context) {
-//        super.onAttach(context);
-//        if (context instanceof MainActivity) {
-//            mActivity = (MainActivity) getActivity();
-//        }
-//    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -71,7 +63,7 @@ public class HomeFirstFragment extends BaseFragment implements OnClickListener, 
     @Override
     protected void setUp(View view) {
         charactersRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        marvelService = ApiUtils.getMarvelCharacterService();
+        marvelService = AppApiHelper.getMarvelCharacterService();
         mAdapter = new CharactersAdapter(new ArrayList<CharacterDto>(0));
         mAdapter.setCallback(this);
         btTopHeroes.setOnClickListener(this);
@@ -91,7 +83,7 @@ public class HomeFirstFragment extends BaseFragment implements OnClickListener, 
 
             @Override
             public void onFailure(Call<MarvelResponse<CharactersDto>> call, Throwable t) {
-                onError("Error occurred!!");
+                //onError("Error occurred!!");
             }
         });
     }
