@@ -29,8 +29,9 @@ public class AppDataManager implements DataManager{
         mMarvelService = AppApiHelper.getMarvelCharacterService();
     }
 
+
+    @Override
     public void getCharacters(Callback<MarvelResponse<CharactersDto>> listener) {
         mMarvelService.getCharacters().enqueue(listener);
     }
-
 }

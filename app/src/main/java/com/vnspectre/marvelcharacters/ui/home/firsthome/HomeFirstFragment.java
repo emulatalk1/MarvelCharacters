@@ -12,27 +12,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.vnspectre.marvelcharacters.R;
+import com.vnspectre.marvelcharacters.data.AppDataManager;
 import com.vnspectre.marvelcharacters.data.network.marvelapi.model.CharacterDto;
 import com.vnspectre.marvelcharacters.ui.base.BaseFragment;
 import com.vnspectre.marvelcharacters.ui.home.secondhome.HomeSecondFragment;
-import com.vnspectre.marvelcharacters.data.network.AppApiHelper;
-import com.vnspectre.marvelcharacters.data.network.marvelapi.MarvelService;
-import com.vnspectre.marvelcharacters.data.network.marvelapi.model.CharactersDto;
-import com.vnspectre.marvelcharacters.data.network.marvelapi.model.MarvelResponse;
 
 import java.util.ArrayList;
+import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-public class HomeFirstFragment extends BaseFragment implements OnClickListener, CharactersAdapter.Callback {
+public class HomeFirstFragment extends BaseFragment implements HomeFirstMvpView, OnClickListener, CharactersAdapter.Callback {
 
     private Button btTopHeroes;
     private TextView totalCharacters;
-    private MarvelService marvelService;
     private CharactersAdapter mAdapter;
     private RecyclerView charactersRecyclerView;
+
+    private HomeFirstMvpPresenter<HomeFirstMvpView> mPresenter;
 
     public HomeFirstFragment() {
     }
@@ -57,35 +52,23 @@ public class HomeFirstFragment extends BaseFragment implements OnClickListener, 
         btTopHeroes = homeFirst.findViewById(R.id.bt_topHeroes);
         charactersRecyclerView = homeFirst.findViewById(R.id.recylerView_characters);
 
+        mPresenter = new HomeFirstPresenter<>(AppDataManager.getInstance());
+        mPresenter.onAttach(this);
+
         return homeFirst;
     }
 
     @Override
     protected void setUp(View view) {
         charactersRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        marvelService = AppApiHelper.getMarvelCharacterService();
         mAdapter = new CharactersAdapter(new ArrayList<CharacterDto>(0));
         mAdapter.setCallback(this);
+
         btTopHeroes.setOnClickListener(this);
 
         charactersRecyclerView.setAdapter(mAdapter);
 
-        loadMarvelCharacters();
-    }
-
-    public void loadMarvelCharacters() {
-        marvelService.getCharacters().enqueue(new Callback<MarvelResponse<CharactersDto>>() {
-            @Override
-            public void onResponse(Call<MarvelResponse<CharactersDto>> call, Response<MarvelResponse<CharactersDto>> response) {
-                mAdapter.updateMarvelCharacters(response.body().getResponse().getCharacters());
-                totalCharacters.setText(String.format("(%s)", String.valueOf(response.body().getResponse().getCharacters().size())));
-            }
-
-            @Override
-            public void onFailure(Call<MarvelResponse<CharactersDto>> call, Throwable t) {
-                //onError("Error occurred!!");
-            }
-        });
+        mPresenter.onViewPrepared();
     }
 
     @Override
@@ -100,5 +83,17 @@ public class HomeFirstFragment extends BaseFragment implements OnClickListener, 
     @Override
     public void onCharacterViewClick(String text) {
         Toast.makeText(getContext(), text + " was clicked", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void updateCharacters(List<CharacterDto> characterList) {
+        mAdapter.updateMarvelCharacters(characterList);
+        totalCharacters.setText(String.format("(%s)", String.valueOf(characterList.size())));
+    }
+
+    @Override
+    public void onDestroy() {
+        mPresenter.onDetach();
+        super.onDestroy();
     }
 }

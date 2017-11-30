@@ -21,7 +21,7 @@ import com.vnspectre.marvelcharacters.utils.NetworkUtils;
  * Created by Spectre on 11/30/17.
  */
 
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment implements MvpView {
 
     private MainActivity mActivity;
 
@@ -39,6 +39,20 @@ public abstract class BaseFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onError(String message) {
+        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showMessage(String message) {
+        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public boolean isNetworkConnected() {
+        return NetworkUtils.isNetworkConnected(mActivity.getBaseContext());
+    }
 
     public MainActivity getMainActivity() {
         return mActivity;
