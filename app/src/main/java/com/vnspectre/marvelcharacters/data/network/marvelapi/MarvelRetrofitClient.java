@@ -1,6 +1,4 @@
-package com.vnspectre.marvelcharacters.model;
-
-import com.vnspectre.marvelcharacters.model.marvel.AuthInterceptor;
+package com.vnspectre.marvelcharacters.data.network.marvelapi;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;

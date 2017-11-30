@@ -9,8 +9,8 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.vnspectre.marvelcharacters.R;
-import com.vnspectre.marvelcharacters.model.marvel.entities.CharacterDto;
-import com.vnspectre.marvelcharacters.model.marvel.entities.MarvelImage;
+import com.vnspectre.marvelcharacters.data.network.marvelapi.entities.CharacterDto;
+import com.vnspectre.marvelcharacters.data.network.marvelapi.entities.MarvelImage;
 import com.vnspectre.marvelcharacters.ui.base.BaseViewHolder;
 
 import java.util.List;

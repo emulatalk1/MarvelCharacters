@@ -1,6 +1,5 @@
 package com.vnspectre.marvelcharacters.ui.home.firsthome;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,14 +12,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.vnspectre.marvelcharacters.R;
-import com.vnspectre.marvelcharacters.activity.MainActivity;
-import com.vnspectre.marvelcharacters.model.marvel.entities.CharacterDto;
+import com.vnspectre.marvelcharacters.data.network.marvelapi.entities.CharacterDto;
 import com.vnspectre.marvelcharacters.ui.base.BaseFragment;
 import com.vnspectre.marvelcharacters.ui.home.secondhome.HomeSecondFragment;
-import com.vnspectre.marvelcharacters.model.ApiUtils;
-import com.vnspectre.marvelcharacters.model.MarvelCharactersService;
-import com.vnspectre.marvelcharacters.model.marvel.entities.CharactersDto;
-import com.vnspectre.marvelcharacters.model.marvel.entities.MarvelResponse;
+import com.vnspectre.marvelcharacters.data.network.ApiUtils;
+import com.vnspectre.marvelcharacters.data.network.marvelapi.MarvelCharactersService;
+import com.vnspectre.marvelcharacters.data.network.marvelapi.entities.CharactersDto;
+import com.vnspectre.marvelcharacters.data.network.marvelapi.entities.MarvelResponse;
 
 import java.util.ArrayList;
 

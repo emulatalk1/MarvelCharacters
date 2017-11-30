@@ -1,4 +1,4 @@
-package com.vnspectre.marvelcharacters.model.marvel.entities;
+package com.vnspectre.marvelcharacters.data.network.marvelapi.entities;
 
 import com.vnspectre.marvelcharacters.utils.CommonUtils;
 

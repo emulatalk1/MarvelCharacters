@@ -1,4 +1,4 @@
-package com.vnspectre.marvelcharacters.model.marvel;
+package com.vnspectre.marvelcharacters.data.network.marvelapi;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
