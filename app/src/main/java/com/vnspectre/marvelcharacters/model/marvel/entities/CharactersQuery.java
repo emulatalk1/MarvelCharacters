@@ -1,6 +1,6 @@
 package com.vnspectre.marvelcharacters.model.marvel.entities;
 
-import com.vnspectre.marvelcharacters.utils.DateUtil;
+import com.vnspectre.marvelcharacters.utils.CommonUtils;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -241,7 +241,7 @@ public class CharactersQuery {
             if (date == null) {
                 return null;
             }
-            return DateUtil.parseDate(date);
+            return CommonUtils.parseDate(date);
         }
 
         private void checkOffset(int offset) {

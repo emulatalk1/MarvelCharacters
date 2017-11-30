@@ -1,13 +1,11 @@
 package com.vnspectre.marvelcharacters.ui.home.firsthome;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.vnspectre.marvelcharacters.R;
@@ -37,7 +35,7 @@ public class CharactersAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     @Override
     public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new CharacterViewHolder(
-                LayoutInflater.from(parent.getContext()).inflate(R.layout.home_first_container_character_layout, parent, false));
+                LayoutInflater.from(parent.getContext()).inflate(R.layout.card_layout, parent, false));
     }
 
     @Override

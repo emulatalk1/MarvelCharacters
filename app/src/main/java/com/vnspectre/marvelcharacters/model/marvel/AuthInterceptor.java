@@ -1,5 +1,7 @@
 package com.vnspectre.marvelcharacters.model.marvel;
 
+import com.vnspectre.marvelcharacters.utils.CommonUtils;
+
 import java.io.IOException;
 
 import okhttp3.HttpUrl;
@@ -18,18 +20,16 @@ public class AuthInterceptor implements Interceptor {
 
     private final String publicKey;
     private final String privateKey;
-    private final TimeProvider timeProvider;
     private final AuthHashGenerator authHashGenerator = new AuthHashGenerator();
 
-    public AuthInterceptor(String publicKey, String privateKey, TimeProvider timeProvider) {
+    public AuthInterceptor(String publicKey, String privateKey) {
         this.publicKey = publicKey;
         this.privateKey = privateKey;
-        this.timeProvider = timeProvider;
     }
 
     @Override
     public Response intercept(Chain chain) throws IOException {
-        String timestamp = String.valueOf(timeProvider.currentTimeMillis());
+        String timestamp = String.valueOf(CommonUtils.getTimeStamp());
         String hash;
         hash = authHashGenerator.generateHash(timestamp, publicKey, privateKey);
         Request request = chain.request();

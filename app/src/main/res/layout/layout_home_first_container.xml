@@ -9,15 +9,10 @@
         android:orientation="vertical">
 
         <FrameLayout
-            android:id="@+id/frame_image_slider"
             android:layout_width="match_parent"
             android:layout_height="190dp">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="This is image slider container." />
+            <include layout="@layout/layout_home_first_container_imageslider"/>
 
         </FrameLayout>
 
@@ -50,7 +45,7 @@
                 android:layout_marginLeft="@dimen/stroke_width_inner"
                 android:layout_toEndOf="@+id/textView"
                 android:layout_toRightOf="@+id/textView"
-                android:text="(12)"
+                android:text="(0)"
                 android:textColor="@color/white"
                 android:textSize="13sp" />
 
@@ -88,16 +83,10 @@
 
         </RelativeLayout>
         <FrameLayout
-            android:id="@+id/frame_characters_container"
             android:layout_width="match_parent"
-            android:layout_height="220dp"
-            android:background="@color/colorTopNavigationBar">
-            <android.support.v7.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/recylerView_characters">
+            android:layout_height="220dp">
 
-            </android.support.v7.widget.RecyclerView>
+            <include layout="@layout/layout_home_first_container_charaters"/>
 
         </FrameLayout>
 
@@ -155,17 +144,10 @@
 
         </RelativeLayout>
         <FrameLayout
-            android:id="@+id/frame_comics_container"
             android:layout_width="match_parent"
-            android:layout_height="220dp"
-            android:background="@color/colorTopNavigationBar">
+            android:layout_height="220dp">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="This is comics container."
-                android:textColor="@color/white"/>
+            <include layout="@layout/layout_home_first_container_comics"/>
 
         </FrameLayout>
 
@@ -223,17 +205,10 @@
 
         </RelativeLayout>
         <FrameLayout
-            android:id="@+id/frame_events_container"
             android:layout_width="match_parent"
-            android:layout_height="220dp"
-            android:background="@color/colorTopNavigationBar">
+            android:layout_height="220dp">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="This is events container."
-                android:textColor="@color/white"/>
+            <include layout="@layout/layout_home_first_container_events"/>
 
         </FrameLayout>
     </LinearLayout>

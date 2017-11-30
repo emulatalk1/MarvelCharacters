@@ -2,7 +2,6 @@ package com.vnspectre.marvelcharacters.ui.home.firsthome;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,6 +15,7 @@ import android.widget.Toast;
 import com.vnspectre.marvelcharacters.R;
 import com.vnspectre.marvelcharacters.activity.MainActivity;
 import com.vnspectre.marvelcharacters.model.marvel.entities.CharacterDto;
+import com.vnspectre.marvelcharacters.ui.base.BaseFragment;
 import com.vnspectre.marvelcharacters.ui.home.secondhome.HomeSecondFragment;
 import com.vnspectre.marvelcharacters.model.ApiUtils;
 import com.vnspectre.marvelcharacters.model.MarvelCharactersService;
@@ -28,12 +28,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HomeFirstFragment extends Fragment implements OnClickListener, CharactersAdapter.Callback {
+public class HomeFirstFragment extends BaseFragment implements OnClickListener, CharactersAdapter.Callback {
 
     private Button btTopHeroes;
     private TextView totalCharacters;
     private MarvelCharactersService marvelService;
     private CharactersAdapter mAdapter;
+    private RecyclerView charactersRecyclerView;
+//    private MainActivity mActivity;
 
     public HomeFirstFragment() {
     }
@@ -43,10 +45,13 @@ public class HomeFirstFragment extends Fragment implements OnClickListener, Char
         return fragment;
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
+//    @Override
+//    public void onAttach(Context context) {
+//        super.onAttach(context);
+//        if (context instanceof MainActivity) {
+//            mActivity = (MainActivity) getActivity();
+//        }
+//    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -60,20 +65,22 @@ public class HomeFirstFragment extends Fragment implements OnClickListener, Char
 
         totalCharacters = homeFirst.findViewById(R.id.tv_totalCharacters);
         btTopHeroes = homeFirst.findViewById(R.id.bt_topHeroes);
-        btTopHeroes.setOnClickListener(this);
+        charactersRecyclerView = homeFirst.findViewById(R.id.recylerView_characters);
 
-        RecyclerView charactersRecyclerView = homeFirst.findViewById(R.id.recylerView_characters);
+        return homeFirst;
+    }
+
+    @Override
+    protected void setUp(View view) {
         charactersRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-
         marvelService = ApiUtils.getMarvelCharacterService();
         mAdapter = new CharactersAdapter(new ArrayList<CharacterDto>(0));
         mAdapter.setCallback(this);
+        btTopHeroes.setOnClickListener(this);
 
         charactersRecyclerView.setAdapter(mAdapter);
 
         loadMarvelCharacters();
-
-        return homeFirst;
     }
 
     public void loadMarvelCharacters() {
@@ -86,20 +93,16 @@ public class HomeFirstFragment extends Fragment implements OnClickListener, Char
 
             @Override
             public void onFailure(Call<MarvelResponse<CharactersDto>> call, Throwable t) {
-                showErrorMessage();
+                onError("Error occurred!!");
             }
         });
-    }
-
-    private void showErrorMessage() {
-        Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bt_topHeroes:
-                ((MainActivity) getActivity()).getmNavController().pushFragment(HomeSecondFragment.newInstance());
+                getMainActivity().getmNavController().pushFragment(HomeSecondFragment.newInstance());
                 break;
         }
     }

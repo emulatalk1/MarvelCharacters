@@ -1,7 +1,6 @@
 package com.vnspectre.marvelcharacters.model;
 
 import com.vnspectre.marvelcharacters.model.marvel.AuthInterceptor;
-import com.vnspectre.marvelcharacters.model.marvel.TimeProvider;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -42,7 +41,6 @@ public class MarvelRetrofitClient {
         private final String publicKey;
         private Retrofit retrofit;
         private String baseUrl = MARVEL_API_BASE_URL;
-        private TimeProvider timeProvider = new TimeProvider();
 
         public Builder(String publicKey, String privateKey) {
             if (publicKey == null) {
@@ -79,7 +77,7 @@ public class MarvelRetrofitClient {
         }
 
         private Retrofit buildRetrofit() {
-            OkHttpClient.Builder builder = new OkHttpClient.Builder().addInterceptor(new AuthInterceptor(publicKey, privateKey, timeProvider));
+            OkHttpClient.Builder builder = new OkHttpClient.Builder().addInterceptor(new AuthInterceptor(publicKey, privateKey));
 
             OkHttpClient client = builder.build();
 
