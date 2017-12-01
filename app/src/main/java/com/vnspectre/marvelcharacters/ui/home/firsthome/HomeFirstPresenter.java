@@ -25,7 +25,7 @@ public class HomeFirstPresenter<V extends HomeFirstMvpView> extends BasePresente
 
     @Override
     public void onViewPrepared() {
-        getDataManager().getCharacters(new Callback<MarvelResponse<CharactersDto>>() {
+        getDataManager().getMarvelCharacters(new Callback<MarvelResponse<CharactersDto>>() {
             @Override
             public void onResponse(Call<MarvelResponse<CharactersDto>> call, Response<MarvelResponse<CharactersDto>> response) {
                 getMvpView().updateCharacters(response.body().getResponse().getCharacters());

@@ -11,6 +11,6 @@ import retrofit2.Callback;
 
 public interface DataManager {
 
-    void getCharacters(Callback<MarvelResponse<CharactersDto>> listener);
+    void getMarvelCharacters(Callback<MarvelResponse<CharactersDto>> listener);
 
 }

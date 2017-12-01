@@ -29,7 +29,7 @@ public class AppDataManager implements DataManager{
 
 
     @Override
-    public void getCharacters(Callback<MarvelResponse<CharactersDto>> listener) {
+    public void getMarvelCharacters(Callback<MarvelResponse<CharactersDto>> listener) {
         mMarvelRepository.getCharacters(listener);
     }
 }
