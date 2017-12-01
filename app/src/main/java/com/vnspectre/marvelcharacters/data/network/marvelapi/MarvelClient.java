@@ -1,5 +1,7 @@
 package com.vnspectre.marvelcharacters.data.network.marvelapi;
 
+import com.vnspectre.marvelcharacters.utils.SECRET_KEYS;
+
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -8,20 +10,20 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by Spectre on 11/27/17.
  */
 
-public class MarvelRetrofitClient {
+public class MarvelClient {
 
-    private static MarvelRetrofitClient singleton;
+    private static MarvelClient singleton;
     private final String publicKey;
     private final String privateKey;
     private final Retrofit retrofit;
 
-    MarvelRetrofitClient(String publicKey, String privateKey, Retrofit retrofit) {
+    MarvelClient(String publicKey, String privateKey, Retrofit retrofit) {
         this.publicKey = publicKey;
         this.privateKey = privateKey;
         this.retrofit = retrofit;
     }
 
-    public static MarvelRetrofitClient with(String publicKey, String privateKey) {
+    public static MarvelClient with(String publicKey, String privateKey) {
         if (singleton == null) {
             singleton = new Builder(publicKey, privateKey).build();
         }
@@ -30,6 +32,10 @@ public class MarvelRetrofitClient {
 
     public Retrofit getRetrofit() {
         return retrofit;
+    }
+
+    public static MarvelService getMarvelCharacterService() {
+        return MarvelClient.with(SECRET_KEYS.MARVEL_PUBLIC_KEY, SECRET_KEYS.MARVEL_PRIVATE_KEY).getRetrofit().create(MarvelService.class);
     }
 
     private static class Builder {
@@ -66,12 +72,12 @@ public class MarvelRetrofitClient {
             return this;
         }
 
-        public MarvelRetrofitClient build() {
+        public MarvelClient build() {
             if (retrofit == null) {
                 retrofit = buildRetrofit();
             }
 
-            return new MarvelRetrofitClient(publicKey, privateKey, retrofit);
+            return new MarvelClient(publicKey, privateKey, retrofit);
         }
 
         private Retrofit buildRetrofit() {

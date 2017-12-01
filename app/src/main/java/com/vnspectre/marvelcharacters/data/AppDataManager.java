@@ -1,10 +1,8 @@
 package com.vnspectre.marvelcharacters.data;
 
-import com.vnspectre.marvelcharacters.data.network.AppApiHelper;
-import com.vnspectre.marvelcharacters.data.network.marvelapi.MarvelService;
-import com.vnspectre.marvelcharacters.data.network.marvelapi.model.CharacterDto;
 import com.vnspectre.marvelcharacters.data.network.marvelapi.model.CharactersDto;
 import com.vnspectre.marvelcharacters.data.network.marvelapi.model.MarvelResponse;
+import com.vnspectre.marvelcharacters.data.repository.MarvelRepository;
 
 import retrofit2.Callback;
 
@@ -16,22 +14,22 @@ public class AppDataManager implements DataManager{
 
     private static AppDataManager sInstance;
 
-    private final MarvelService mMarvelService;
+    private MarvelRepository mMarvelRepository;
 
     public static AppDataManager getInstance() {
         if (sInstance == null) {
-            sInstance = new AppDataManager();
+            sInstance = new AppDataManager(MarvelRepository.getInstance());
         }
         return sInstance;
     }
 
-    private AppDataManager() {
-        mMarvelService = AppApiHelper.getMarvelCharacterService();
+    private AppDataManager(MarvelRepository mMarvelRepository) {
+        this.mMarvelRepository = mMarvelRepository;
     }
 
 
     @Override
     public void getCharacters(Callback<MarvelResponse<CharactersDto>> listener) {
-        mMarvelService.getCharacters().enqueue(listener);
+        mMarvelRepository.getCharacters(listener);
     }
 }
