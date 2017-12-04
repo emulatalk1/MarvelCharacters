@@ -15,20 +15,29 @@ import android.widget.Button;
 
 import com.vnspectre.marvelcharacters.R;
 import com.vnspectre.marvelcharacters.activity.MainActivity;
+import com.vnspectre.marvelcharacters.ui.base.BaseFragment;
+import com.vnspectre.marvelcharacters.ui.home.secondhome.characters.HomeSecondContainer1Fragment;
+import com.vnspectre.marvelcharacters.ui.home.secondhome.comics.HomeSecondContainer2Fragment;
+import com.vnspectre.marvelcharacters.ui.home.secondhome.events.HomeSecondContainer3Fragment;
 
-public class HomeSecondFragment extends Fragment implements View.OnClickListener {
+public class HomeSecondFragment extends BaseFragment implements View.OnClickListener {
+
+    private static final String TAG = HomeSecondFragment.class.getName();
 
     private Button btBacktoFirstFragment;
     private Button btContainer1;
     private Button btContainer2;
     private Button btContainer3;
 
+    private static int idFragment;
+
     public HomeSecondFragment() {
         // Required empty public constructor
     }
 
-    public static HomeSecondFragment newInstance() {
+    public static HomeSecondFragment newInstance(int id) {
         HomeSecondFragment fragment = new HomeSecondFragment();
+        idFragment = id;
         return fragment;
     }
 
@@ -36,6 +45,7 @@ public class HomeSecondFragment extends Fragment implements View.OnClickListener
     public void onAttach(Context context) {
         super.onAttach(context);
     }
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,17 +58,40 @@ public class HomeSecondFragment extends Fragment implements View.OnClickListener
         View view = inflater.inflate(R.layout.fragment_home_second, container, false);
 
         btBacktoFirstFragment = view.findViewById(R.id.bt_backHome);
-        btContainer1 = view.findViewById(R.id.bt_womenHeroes);
-        btContainer2 = view.findViewById(R.id.bt_topVillains);
-        btContainer3 = view.findViewById(R.id.bt_secondTopHeroes);
+        btContainer1 = view.findViewById(R.id.bt_secondCharacters);
+        btContainer2 = view.findViewById(R.id.bt_secondComics);
+        btContainer3 = view.findViewById(R.id.bt_secondEvents);
 
+        return view;
+    }
+
+    @Override
+    protected void setUp(View view) {
         btBacktoFirstFragment.setOnClickListener(this);
         btContainer1.setOnClickListener(this);
         btContainer2.setOnClickListener(this);
         btContainer3.setOnClickListener(this);
-        btContainer3.callOnClick();
 
-        return view;
+        switch (idFragment) {
+            case R.id.bt_events:
+                btContainer3.callOnClick();
+                break;
+
+            case R.id.tv_sa_events:
+                btContainer3.callOnClick();
+                break;
+
+            case R.id.tv_sa_characters:
+                btContainer1.callOnClick();
+                break;
+
+            case R.id.tv_sa_comics:
+                btContainer2.callOnClick();
+                break;
+
+            default:
+                Log.d(TAG, "onCreateView: Bug at " + TAG);
+        }
     }
 
     @Override
@@ -70,19 +103,22 @@ public class HomeSecondFragment extends Fragment implements View.OnClickListener
                 Log.i("Back", "onClick: back");
                 break;
 
-            case R.id.bt_womenHeroes:
+            case R.id.bt_secondCharacters:
                 replace(HomeSecondContainer1Fragment.newInstance());
+                idFragment = R.id.tv_sa_characters;
                 Log.i("women", "onClick: women");
                 changeBackgroundTopNavigation(btContainer1);
                 break;
 
-            case R.id.bt_topVillains:
+            case R.id.bt_secondComics:
                 replace(HomeSecondContainer2Fragment.newInstance());
+                idFragment = R.id.tv_sa_comics;
                 changeBackgroundTopNavigation(btContainer2);
                 break;
 
-            case R.id.bt_secondTopHeroes:
+            case R.id.bt_secondEvents:
                 replace(HomeSecondContainer3Fragment.newInstance());
+                idFragment = R.id.tv_sa_events;
                 changeBackgroundTopNavigation(btContainer3);
                 break;
         }
@@ -97,19 +133,19 @@ public class HomeSecondFragment extends Fragment implements View.OnClickListener
     private void changeBackgroundTopNavigation(Button button) {
         int buttonId = button.getId();
         switch (buttonId) {
-            case R.id.bt_womenHeroes:
+            case R.id.bt_secondCharacters:
                 btContainer1.setBackgroundResource(R.drawable.background_button_clicked);
                 btContainer2.setBackgroundResource(R.drawable.background_button_unclicked);
                 btContainer3.setBackgroundResource(R.drawable.background_button_unclicked);
                 break;
 
-            case R.id.bt_topVillains:
+            case R.id.bt_secondComics:
                 btContainer1.setBackgroundResource(R.drawable.background_button_unclicked);
                 btContainer2.setBackgroundResource(R.drawable.background_button_clicked);
                 btContainer3.setBackgroundResource(R.drawable.background_button_unclicked);
                 break;
 
-            case R.id.bt_secondTopHeroes:
+            case R.id.bt_secondEvents:
                 btContainer1.setBackgroundResource(R.drawable.background_button_unclicked);
                 btContainer2.setBackgroundResource(R.drawable.background_button_unclicked);
                 btContainer3.setBackgroundResource(R.drawable.background_button_clicked);
