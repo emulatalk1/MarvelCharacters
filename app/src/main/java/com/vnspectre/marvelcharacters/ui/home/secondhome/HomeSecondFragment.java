@@ -16,7 +16,7 @@ import android.widget.Button;
 import com.vnspectre.marvelcharacters.R;
 import com.vnspectre.marvelcharacters.activity.MainActivity;
 import com.vnspectre.marvelcharacters.ui.base.BaseFragment;
-import com.vnspectre.marvelcharacters.ui.home.secondhome.characters.HomeSecondContainer1Fragment;
+import com.vnspectre.marvelcharacters.ui.home.secondhome.characters.CharactersFragment;
 import com.vnspectre.marvelcharacters.ui.home.secondhome.comics.HomeSecondContainer2Fragment;
 import com.vnspectre.marvelcharacters.ui.home.secondhome.events.HomeSecondContainer3Fragment;
 
@@ -104,7 +104,7 @@ public class HomeSecondFragment extends BaseFragment implements View.OnClickList
                 break;
 
             case R.id.bt_secondCharacters:
-                replace(HomeSecondContainer1Fragment.newInstance());
+                replace(CharactersFragment.newInstance());
                 idFragment = R.id.tv_sa_characters;
                 Log.i("women", "onClick: women");
                 changeBackgroundTopNavigation(btContainer1);
