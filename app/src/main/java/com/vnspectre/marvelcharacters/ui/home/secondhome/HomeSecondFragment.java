@@ -157,5 +157,4 @@ public class HomeSecondFragment extends BaseFragment implements View.OnClickList
         }
     }
 
-
 }

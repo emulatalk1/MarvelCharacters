@@ -7,5 +7,9 @@ import com.vnspectre.marvelcharacters.ui.base.MvpPresenter;
  */
 
 public interface CharactersMvpPresenter<V extends CharactersMvpView>  extends MvpPresenter<V> {
+
     void onViewPrepared();
+
+    void onListEndReached(Integer offset, Integer limit);
+
 }

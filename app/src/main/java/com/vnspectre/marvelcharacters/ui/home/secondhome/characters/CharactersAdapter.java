@@ -1,10 +1,13 @@
 package com.vnspectre.marvelcharacters.ui.home.secondhome.characters;
 
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -23,11 +26,17 @@ public class CharactersAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     private static final String TAG = CharactersAdapter.class.getName();
 
+    public static final int VIEW_TYPE_LIST = 1;
+    public static final int VIEW_TYPE_LOADING = 2;
+
     private Callback mCallback;
     private List<CharacterDto> mCharacterList;
 
+    private int mViewType;
+
     public CharactersAdapter(List<CharacterDto> mCharacterList) {
         this.mCharacterList = mCharacterList;
+        mViewType = VIEW_TYPE_LIST;
     }
 
     public void setCallback(Callback callback) {
@@ -35,19 +44,107 @@ public class CharactersAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     }
 
     @Override
+    public int getItemViewType(int position) {
+        return mCharacterList.get(position) == null ? VIEW_TYPE_LOADING : mViewType;
+    }
+
+    @Override
     public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new CharacterViewHolder(
-                LayoutInflater.from(parent.getContext()).inflate(R.layout.card_layout_landscape, parent, false));
+        if (viewType == VIEW_TYPE_LOADING) {
+            return new ProgressBarViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_progress_bar, parent, false));
+        }
+        return new CharacterViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.card_layout_landscape, parent, false));
     }
 
     @Override
     public void onBindViewHolder(BaseViewHolder holder, int position) {
+        if (holder.getItemViewType() == VIEW_TYPE_LOADING) {
+            return;
+        }
         holder.onBind(position);
     }
 
     @Override
     public int getItemCount() {
         return mCharacterList.size();
+    }
+
+    public boolean isEmpty() {
+        return getItemCount() == 0;
+    }
+
+    public boolean removeLoadingView() {
+        if (mCharacterList.size() > 1) {
+            int loadingViewPosition = mCharacterList.size() - 1;
+            if (getItemViewType(loadingViewPosition) == VIEW_TYPE_LOADING) {
+                remove(loadingViewPosition);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void remove(int position) {
+        if (mCharacterList.size() < position) {
+            Log.w(TAG, "The item at position: " + position + " doesn't exist");
+            return;
+        }
+        mCharacterList.remove(position);
+        notifyItemRemoved(position);
+    }
+
+    public void removeAll() {
+        mCharacterList.clear();
+        notifyDataSetChanged();
+    }
+
+    public boolean addLoadingView(RecyclerView recyclerView) {
+        if (getItemViewType(mCharacterList.size() - 1) != VIEW_TYPE_LOADING) {
+            add(null, recyclerView);
+            return true;
+        }
+        return false;
+    }
+
+    public void add(CharacterDto item, RecyclerView recyclerView) {
+        add(null, item, recyclerView);
+    }
+
+    public void add(@Nullable Integer position, CharacterDto item, RecyclerView recyclerView) {
+        if (position != null) {
+            mCharacterList.add(position, item);
+            notifyItemInserted(position);
+        } else {
+            mCharacterList.add(item);
+            recyclerView.post(new Runnable() {
+                @Override
+                public void run() {
+                    notifyItemInserted(mCharacterList.size() - 1);
+                }
+            });
+        }
+    }
+
+    public int getViewType() {
+        return mViewType;
+    }
+
+    public void setViewType(int viewType) {
+        mViewType = viewType;
+    }
+
+    public class ProgressBarViewHolder extends BaseViewHolder {
+
+        public final ProgressBar progressBar;
+
+        public ProgressBarViewHolder(View view) {
+            super(view);
+            progressBar = view.findViewById(R.id.progress_bar);
+        }
+
+        @Override
+        protected void clear() {
+        }
     }
 
     public class CharacterViewHolder extends BaseViewHolder {
@@ -67,6 +164,7 @@ public class CharactersAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         protected void clear() {
             imgCharacter.setImageDrawable(null);
             txtCharacterName.setText("");
+            txtCharacterDescription.setText("");
         }
 
         @Override
@@ -101,8 +199,9 @@ public class CharactersAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     }
 
     public void updateMarvelCharacters(List<CharacterDto> mListCharacters) {
-        this.mCharacterList = mListCharacters;
-        notifyDataSetChanged();
+        this.mCharacterList.addAll(mListCharacters);
+//        notifyDataSetChanged();
+        notifyItemRangeInserted(getItemCount(), mCharacterList.size() - 1);
     }
 
     public interface Callback {

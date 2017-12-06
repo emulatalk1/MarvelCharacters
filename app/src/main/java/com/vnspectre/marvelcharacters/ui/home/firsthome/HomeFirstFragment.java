@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -78,16 +79,16 @@ public class HomeFirstFragment extends BaseFragment implements HomeFirstMvpView,
     @Override
     protected void setUp(View view) {
         if (mAdapter == null) {
-            charactersRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
             mAdapter = new CharactersAdapter(new ArrayList<CharacterDto>(0));
+            mPresenter.onViewPrepared();
+        }
+            charactersRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
             mAdapter.setCallback(this);
             charactersRecyclerView.setAdapter(mAdapter);
-            mPresenter.onViewPrepared();
             btEvents.setOnClickListener(this);
             saCharacters.setOnClickListener(this);
             saComics.setOnClickListener(this);
             saEvents.setOnClickListener(this);
-        }
     }
 
     @Override
@@ -131,4 +132,5 @@ public class HomeFirstFragment extends BaseFragment implements HomeFirstMvpView,
         mPresenter.onDetach();
         super.onDestroy();
     }
+
 }

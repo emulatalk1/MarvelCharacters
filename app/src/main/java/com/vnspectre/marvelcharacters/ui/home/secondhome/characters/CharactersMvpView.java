@@ -10,5 +10,11 @@ import java.util.List;
  */
 
 public interface CharactersMvpView extends MvpView {
+    void showProgress();
+
+    void hideProgress();
+
+    void showMessageLayout(boolean show);
+
     void updateCharacters(List<CharacterDto> characterList);
 }

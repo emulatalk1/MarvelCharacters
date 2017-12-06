@@ -1,5 +1,6 @@
 package com.vnspectre.marvelcharacters.data;
 
+import com.vnspectre.marvelcharacters.data.network.RemoteCallback;
 import com.vnspectre.marvelcharacters.data.network.marvelapi.model.CharactersDto;
 import com.vnspectre.marvelcharacters.data.network.marvelapi.model.MarvelResponse;
 
@@ -11,6 +12,6 @@ import retrofit2.Callback;
 
 public interface DataManager {
 
-    void getMarvelCharacters(Callback<MarvelResponse<CharactersDto>> listener);
+    void getMarvelCharacters(int offSet, int limit, String searchQuery, RemoteCallback<MarvelResponse<CharactersDto>> listener);
 
 }

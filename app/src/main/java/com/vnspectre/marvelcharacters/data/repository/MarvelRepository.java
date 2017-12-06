@@ -1,5 +1,6 @@
 package com.vnspectre.marvelcharacters.data.repository;
 
+import com.vnspectre.marvelcharacters.data.network.RemoteCallback;
 import com.vnspectre.marvelcharacters.data.network.marvelapi.MarvelClient;
 import com.vnspectre.marvelcharacters.data.network.marvelapi.MarvelService;
 import com.vnspectre.marvelcharacters.data.network.marvelapi.model.CharactersDto;
@@ -28,8 +29,8 @@ public class MarvelRepository {
         mMarvelService = MarvelClient.getMarvelCharacterService();
     }
 
-    public void getCharacters(Callback<MarvelResponse<CharactersDto>> listener) {
-        mMarvelService.getCharacters().enqueue(listener);
+    public void getCharacters(int offSet, int limit, String searchQuery, RemoteCallback<MarvelResponse<CharactersDto>> listener) {
+        mMarvelService.getCharacters(offSet, limit, searchQuery).enqueue(listener);
     }
 
 }
