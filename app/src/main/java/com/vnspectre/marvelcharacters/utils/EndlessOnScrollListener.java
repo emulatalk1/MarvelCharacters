@@ -1,4 +1,4 @@
-package com.vnspectre.marvelcharacters.ui.home.secondhome;
+package com.vnspectre.marvelcharacters.utils;
 
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;

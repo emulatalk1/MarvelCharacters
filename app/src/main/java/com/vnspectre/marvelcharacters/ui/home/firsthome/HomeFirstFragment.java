@@ -1,7 +1,6 @@
 package com.vnspectre.marvelcharacters.ui.home.firsthome;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -10,8 +9,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ProgressBar;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +17,7 @@ import com.vnspectre.marvelcharacters.data.AppDataManager;
 import com.vnspectre.marvelcharacters.data.network.marvelapi.model.CharacterDto;
 import com.vnspectre.marvelcharacters.ui.base.BaseFragment;
 import com.vnspectre.marvelcharacters.ui.home.secondhome.HomeSecondFragment;
+import com.vnspectre.marvelcharacters.ui.home.secondhome.HomeSecondPagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,20 +93,24 @@ public class HomeFirstFragment extends BaseFragment implements HomeFirstMvpView,
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bt_events:
-                getMainActivity().getmNavController().pushFragment(HomeSecondFragment.newInstance(R.id.bt_events));
+                getMainActivity().getmNavController().pushFragment(
+                        HomeSecondFragment.newInstance(HomeSecondPagerAdapter.EVENTS_TAB_CODE));
                 break;
 
             case R.id.tv_sa_characters:
-                getMainActivity().getmNavController().pushFragment(HomeSecondFragment.newInstance(R.id.tv_sa_characters));
+                getMainActivity().getmNavController().pushFragment(
+                        HomeSecondFragment.newInstance(HomeSecondPagerAdapter.CHARACTERS_TAB_CODE));
                 Log.d(TAG, "onClick: see all characters");
                 break;
 
             case R.id.tv_sa_comics:
-                getMainActivity().getmNavController().pushFragment(HomeSecondFragment.newInstance(R.id.tv_sa_comics));
+                getMainActivity().getmNavController().pushFragment(
+                        HomeSecondFragment.newInstance(HomeSecondPagerAdapter.COMICS_TAB_CODE));
                 break;
 
             case R.id.tv_sa_events:
-                getMainActivity().getmNavController().pushFragment(HomeSecondFragment.newInstance(R.id.tv_sa_events));
+                getMainActivity().getmNavController().pushFragment(
+                        HomeSecondFragment.newInstance(HomeSecondPagerAdapter.EVENTS_TAB_CODE));
                 break;
 
             default:

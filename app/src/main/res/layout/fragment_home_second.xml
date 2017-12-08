@@ -1,26 +1,56 @@
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.secondhome.HomeSecondFragment">
+    android:orientation="vertical"
+    android:background="@color/bettergray">
 
-    <RelativeLayout
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/rl_toolbar">
+        android:layout_height="50dp"
+        android:padding="6dp"
+        android:background="@color/colorTopNavigationBar">
 
-        <include layout="@layout/layout_fragment_home_second_toolbar"/>
-    </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <FrameLayout
+            <Button
+                android:id="@+id/bt_backHome"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@color/colorTopNavigationBar"
+                android:text="Home"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="26dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/ic_back"
+                android:gravity="center" />
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tab_layout"
+                style="@style/AppTab"
+                android:layout_toEndOf="@id/bt_backHome"
+                android:layout_toRightOf="@id/bt_backHome"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorTopNavigationBar"
+                app:tabGravity="fill"
+                app:tabIndicatorColor="@color/white" />
+
+        </RelativeLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/feed_view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/rl_toolbar"
-        android:id="@+id/frame_home_second_fragment_container">
+        android:background="@color/white"
+        android:clipToPadding="false" />
 
-    </FrameLayout>
-
-</RelativeLayout>
+</LinearLayout>

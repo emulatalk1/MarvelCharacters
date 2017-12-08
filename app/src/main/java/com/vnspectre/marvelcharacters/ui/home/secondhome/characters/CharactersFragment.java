@@ -16,7 +16,7 @@ import com.vnspectre.marvelcharacters.R;
 import com.vnspectre.marvelcharacters.data.AppDataManager;
 import com.vnspectre.marvelcharacters.data.network.marvelapi.model.CharacterDto;
 import com.vnspectre.marvelcharacters.ui.base.BaseFragment;
-import com.vnspectre.marvelcharacters.ui.home.secondhome.EndlessOnScrollListener;
+import com.vnspectre.marvelcharacters.utils.EndlessOnScrollListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,8 +28,7 @@ public class CharactersFragment extends BaseFragment implements CharactersMvpVie
 
     private static final String TAG = CharactersFragment.class.getName();
 
-    private static CharactersAdapter mAdapter;
-    private static int mAdapterScrollPosition = RecyclerView.NO_POSITION;
+    private CharactersAdapter mAdapter;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private ProgressBar mContentLoadingProgress;
 
@@ -43,12 +42,8 @@ public class CharactersFragment extends BaseFragment implements CharactersMvpVie
         // Required empty public constructor
     }
 
-    public static CharactersFragment newInstance(CharactersAdapter charactersAdapter, int mCharactersAdapterScrollPosition) {
+    public static CharactersFragment newInstance() {
         CharactersFragment fragment = new CharactersFragment();
-        if (mAdapter != null) {
-            mAdapter = charactersAdapter;
-            mAdapterScrollPosition = mCharactersAdapterScrollPosition;
-        }
         return fragment;
     }
 
@@ -87,8 +82,6 @@ public class CharactersFragment extends BaseFragment implements CharactersMvpVie
         mSwipeRefreshLayout.setProgressBackgroundColorSchemeResource(R.color.colorPrimaryDark);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
         mSwipeRefreshLayout.setOnRefreshListener(this);
-
-        getMainActivity().setmSecondHomeCharactersAdapter(mAdapter);
     }
 
     private EndlessOnScrollListener setupScrollListener(RecyclerView.LayoutManager layoutManager) {
@@ -149,17 +142,4 @@ public class CharactersFragment extends BaseFragment implements CharactersMvpVie
         mPresenter.onViewPrepared();
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        LinearLayoutManager manager = (LinearLayoutManager) charactersRecyclerView.getLayoutManager();
-        mAdapterScrollPosition = manager.findFirstVisibleItemPosition();
-        getMainActivity().setmSecondHomeCharactersAdapterScrollPosition(mAdapterScrollPosition);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        charactersRecyclerView.getLayoutManager().scrollToPosition(mAdapterScrollPosition);
-    }
 }

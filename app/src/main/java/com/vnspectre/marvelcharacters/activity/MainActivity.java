@@ -29,10 +29,6 @@ public class MainActivity extends AppCompatActivity implements FragNavController
 
     private BottomNavigationView bottomNavigationView;
 
-    //Save Adapter.
-    private CharactersAdapter mSecondHomeCharactersAdapter;
-    private int mSecondHomeCharactersAdapterScrollPosition;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -137,23 +133,6 @@ public class MainActivity extends AppCompatActivity implements FragNavController
                 break;
         }
         return true;
-    }
-
-    //Getter and setter.
-    public CharactersAdapter getmSecondHomeCharactersAdapter() {
-        return mSecondHomeCharactersAdapter;
-    }
-
-    public void setmSecondHomeCharactersAdapter(CharactersAdapter mSecondHomeCharactersAdapter) {
-        this.mSecondHomeCharactersAdapter = mSecondHomeCharactersAdapter;
-    }
-
-    public int getmSecondHomeCharactersAdapterScrollPosition() {
-        return mSecondHomeCharactersAdapterScrollPosition;
-    }
-
-    public void setmSecondHomeCharactersAdapterScrollPosition(int mSecondHomeCharactersAdapterScrollPosition) {
-        this.mSecondHomeCharactersAdapterScrollPosition = mSecondHomeCharactersAdapterScrollPosition;
     }
 }
 
