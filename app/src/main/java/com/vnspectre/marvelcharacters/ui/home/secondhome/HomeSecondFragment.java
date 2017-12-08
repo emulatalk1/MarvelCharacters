@@ -16,9 +16,11 @@ import android.widget.Button;
 import com.vnspectre.marvelcharacters.R;
 import com.vnspectre.marvelcharacters.activity.MainActivity;
 import com.vnspectre.marvelcharacters.ui.base.BaseFragment;
+import com.vnspectre.marvelcharacters.ui.home.secondhome.characters.CharactersAdapter;
 import com.vnspectre.marvelcharacters.ui.home.secondhome.characters.CharactersFragment;
 import com.vnspectre.marvelcharacters.ui.home.secondhome.comics.HomeSecondContainer2Fragment;
 import com.vnspectre.marvelcharacters.ui.home.secondhome.events.HomeSecondContainer3Fragment;
+import com.vnspectre.marvelcharacters.utils.FragNavController;
 
 public class HomeSecondFragment extends BaseFragment implements View.OnClickListener {
 
@@ -30,6 +32,10 @@ public class HomeSecondFragment extends BaseFragment implements View.OnClickList
     private Button btContainer3;
 
     private static int idFragment;
+
+    //Adapter.
+    private CharactersAdapter mCharactersAdapter;
+    private int mCharactersAdapterScrollPosition;
 
     public HomeSecondFragment() {
         // Required empty public constructor
@@ -67,6 +73,7 @@ public class HomeSecondFragment extends BaseFragment implements View.OnClickList
 
     @Override
     protected void setUp(View view) {
+
         btBacktoFirstFragment.setOnClickListener(this);
         btContainer1.setOnClickListener(this);
         btContainer2.setOnClickListener(this);
@@ -99,12 +106,18 @@ public class HomeSecondFragment extends BaseFragment implements View.OnClickList
         int item = view.getId();
         switch (item) {
             case R.id.bt_backHome:
-                ((MainActivity) getActivity()).getmNavController().popFragment();
+                getMainActivity().getmNavController().popFragment();
                 Log.i("Back", "onClick: back");
                 break;
 
             case R.id.bt_secondCharacters:
-                replace(CharactersFragment.newInstance());
+                mCharactersAdapter = getMainActivity().getmSecondHomeCharactersAdapter();
+                mCharactersAdapterScrollPosition = getMainActivity().getmSecondHomeCharactersAdapterScrollPosition();
+                if (mCharactersAdapter == null) {
+                    replace(CharactersFragment.newInstance(null, mCharactersAdapterScrollPosition));
+                } else {
+                    replace(CharactersFragment.newInstance(mCharactersAdapter, mCharactersAdapterScrollPosition));
+                }
                 idFragment = R.id.tv_sa_characters;
                 Log.i("women", "onClick: women");
                 changeBackgroundTopNavigation(btContainer1);
@@ -125,7 +138,7 @@ public class HomeSecondFragment extends BaseFragment implements View.OnClickList
     }
 
     public void replace(Fragment fragment) {
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentManager fragmentManager = getMainActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frame_home_second_fragment_container, fragment).commit();
     }
@@ -156,5 +169,4 @@ public class HomeSecondFragment extends BaseFragment implements View.OnClickList
 
         }
     }
-
 }

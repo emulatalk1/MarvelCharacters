@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListAdapter;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -29,7 +28,8 @@ public class CharactersFragment extends BaseFragment implements CharactersMvpVie
 
     private static final String TAG = CharactersFragment.class.getName();
 
-    private CharactersAdapter mAdapter;
+    private static CharactersAdapter mAdapter;
+    private static int mAdapterScrollPosition = RecyclerView.NO_POSITION;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private ProgressBar mContentLoadingProgress;
 
@@ -43,8 +43,12 @@ public class CharactersFragment extends BaseFragment implements CharactersMvpVie
         // Required empty public constructor
     }
 
-    public static CharactersFragment newInstance() {
+    public static CharactersFragment newInstance(CharactersAdapter charactersAdapter, int mCharactersAdapterScrollPosition) {
         CharactersFragment fragment = new CharactersFragment();
+        if (mAdapter != null) {
+            mAdapter = charactersAdapter;
+            mAdapterScrollPosition = mCharactersAdapterScrollPosition;
+        }
         return fragment;
     }
 
@@ -68,21 +72,23 @@ public class CharactersFragment extends BaseFragment implements CharactersMvpVie
 
     @Override
     protected void setUp(View view) {
-        //if (mAdapter == null) {
-            charactersRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        if (mAdapter == null) {
             mAdapter = new CharactersAdapter(new ArrayList<CharacterDto>(0));
-            mAdapter.setCallback(this);
-
-            charactersRecyclerView.setAdapter(mAdapter);
-            charactersRecyclerView.addOnScrollListener(setupScrollListener(charactersRecyclerView.getLayoutManager()));
-            charactersRecyclerView.setHasFixedSize(true);
-
             mPresenter.onViewPrepared();
+        }
+        charactersRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
-            mSwipeRefreshLayout.setProgressBackgroundColorSchemeResource(R.color.colorPrimaryDark);
-            mSwipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
-            mSwipeRefreshLayout.setOnRefreshListener(this);
-        //}
+        mAdapter.setCallback(this);
+
+        charactersRecyclerView.setAdapter(mAdapter);
+        charactersRecyclerView.addOnScrollListener(setupScrollListener(charactersRecyclerView.getLayoutManager()));
+        charactersRecyclerView.setHasFixedSize(true);
+
+        mSwipeRefreshLayout.setProgressBackgroundColorSchemeResource(R.color.colorPrimaryDark);
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
+
+        getMainActivity().setmSecondHomeCharactersAdapter(mAdapter);
     }
 
     private EndlessOnScrollListener setupScrollListener(RecyclerView.LayoutManager layoutManager) {
@@ -131,11 +137,6 @@ public class CharactersFragment extends BaseFragment implements CharactersMvpVie
         mAdapter.updateMarvelCharacters(characterList);
     }
 
-    @Override
-    public void onDestroy() {
-        mPresenter.onDetach();
-        super.onDestroy();
-    }
 
     @Override
     public void onCharacterViewClick(String text) {
@@ -146,5 +147,19 @@ public class CharactersFragment extends BaseFragment implements CharactersMvpVie
     public void onRefresh() {
         mAdapter.removeAll();
         mPresenter.onViewPrepared();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        LinearLayoutManager manager = (LinearLayoutManager) charactersRecyclerView.getLayoutManager();
+        mAdapterScrollPosition = manager.findFirstVisibleItemPosition();
+        getMainActivity().setmSecondHomeCharactersAdapterScrollPosition(mAdapterScrollPosition);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        charactersRecyclerView.getLayoutManager().scrollToPosition(mAdapterScrollPosition);
     }
 }
