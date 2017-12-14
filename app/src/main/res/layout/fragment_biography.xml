@@ -1,0 +1,52 @@
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none"
+    tools:context="com.vnspectre.marvelcharacters.ui.detail.characters.biography.BiographyFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:textColor="@color/white"
+            android:background="@color/bettergray"
+            android:gravity="center"
+            android:text="Biography" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:textColor="@color/white"
+            android:background="@color/bettergray"
+            android:gravity="center"
+            android:text="Biography" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:textColor="@color/white"
+            android:background="@color/bettergray"
+            android:gravity="center"
+            android:text="Biography" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:textColor="@color/white"
+            android:background="@color/bettergray"
+            android:gravity="center"
+            android:text="Biography" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:textColor="@color/white"
+            android:background="@color/bettergray"
+            android:gravity="center"
+            android:text="Biography" />
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

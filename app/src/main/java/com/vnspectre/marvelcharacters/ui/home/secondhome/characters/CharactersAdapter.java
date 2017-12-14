@@ -191,7 +191,7 @@ public class CharactersAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mCallback.onCharacterViewClick(character.getName());
+                    mCallback.onCharacterViewClick(character);
                 }
             });
 
@@ -201,11 +201,11 @@ public class CharactersAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     public void updateMarvelCharacters(List<CharacterDto> mListCharacters) {
         this.mCharacterList.addAll(mListCharacters);
 //        notifyDataSetChanged();
-        notifyItemRangeInserted(getItemCount(), mCharacterList.size() - 1);
+        notifyItemRangeInserted(getItemCount(), mCharacterList.size());
     }
 
     public interface Callback {
-        void onCharacterViewClick(String text);
+        void onCharacterViewClick(CharacterDto character);
     }
 
 }

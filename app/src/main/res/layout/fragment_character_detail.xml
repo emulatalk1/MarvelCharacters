@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/topLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/header_cover_image"
+                android:layout_width="match_parent"
+                android:layout_height="261dp"
+                android:scaleType="centerCrop"
+                android:background="@drawable/hieu"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="261dp"
+                android:scaleType="centerCrop"
+                android:background="#4D000000"/>
+
+            <RelativeLayout
+                android:id="@+id/profile_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/header_cover_image"
+                android:background="#c3c3c3">
+
+                <TextView
+                    android:id="@+id/character_profile_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="76dp"
+                    android:layout_marginBottom="12dp"
+                    android:text="Spider-man"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/character_profile_photo"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="201dp"
+                android:background="@drawable/profile_circular_border_imageview"
+                android:scaleType="centerCrop"
+                android:src="@drawable/standard_xlarge" />
+
+        </RelativeLayout>.
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/detail_tab_layout"
+            android:layout_below="@id/character_profile_name"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@color/white"
+            style="@style/AppTabDetail"
+            app:tabGravity="fill"
+            app:tabIndicatorColor="@color/red"/>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/detail_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="573dp"
+            android:background="@color/bettergray"
+            android:clipToPadding="false" />
+
+    </LinearLayout>
+
+</ScrollView>

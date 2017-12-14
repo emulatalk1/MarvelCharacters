@@ -131,7 +131,7 @@ public class HomeFirstFragment extends BaseFragment implements HomeFirstMvpView,
 
     @Override
     public void onDestroy() {
-        mPresenter.onDetach();
+//        mPresenter.onDetach();
         super.onDestroy();
     }
 

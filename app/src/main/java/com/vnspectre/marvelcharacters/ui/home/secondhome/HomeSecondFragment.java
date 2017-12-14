@@ -43,8 +43,9 @@ public class HomeSecondFragment extends BaseFragment{
             view = inflater.inflate(R.layout.fragment_home_second, container, false);
 
             mPagerAdapter = new HomeSecondPagerAdapter(getChildFragmentManager());
-            mViewPager = view.findViewById(R.id.feed_view_pager);
+            mViewPager = view.findViewById(R.id.home_second_view_pager);
             mTabLayout = view.findViewById(R.id.tab_layout);
+
             mButtonBackFirstHome = view.findViewById(R.id.bt_backHome);
         }
         return view;

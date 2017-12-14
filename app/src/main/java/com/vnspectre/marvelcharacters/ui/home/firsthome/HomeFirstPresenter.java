@@ -32,7 +32,7 @@ public class HomeFirstPresenter<V extends HomeFirstMvpView> extends BasePresente
 
             @Override
             public void onUnauthorized() {
-
+                
             }
 
             @Override

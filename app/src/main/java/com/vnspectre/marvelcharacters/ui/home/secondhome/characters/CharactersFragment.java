@@ -10,12 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.vnspectre.marvelcharacters.R;
 import com.vnspectre.marvelcharacters.data.AppDataManager;
 import com.vnspectre.marvelcharacters.data.network.marvelapi.model.CharacterDto;
 import com.vnspectre.marvelcharacters.ui.base.BaseFragment;
+import com.vnspectre.marvelcharacters.ui.detail.characters.CharacterDetailFragment;
 import com.vnspectre.marvelcharacters.utils.EndlessOnScrollListener;
 
 import java.util.ArrayList;
@@ -32,8 +32,8 @@ public class CharactersFragment extends BaseFragment implements CharactersMvpVie
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private ProgressBar mContentLoadingProgress;
 
-    private RecyclerView charactersRecyclerView;
-    private View charactersFragment;
+    private RecyclerView mCharactersRecyclerView;
+    private View mCharactersFragmentView;
     private View mMessageLayout;
 
     private CharactersMvpPresenter<CharactersMvpView> mPresenter;
@@ -49,20 +49,18 @@ public class CharactersFragment extends BaseFragment implements CharactersMvpVie
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        if (charactersFragment != null) {
-            return charactersFragment;
+        if (mCharactersFragmentView == null) {
+            mCharactersFragmentView = inflater.inflate(R.layout.fragment_home_second_container1, container, false);
+
+            mCharactersRecyclerView = mCharactersFragmentView.findViewById(R.id.recyclerView_characters_homesecond);
+            mSwipeRefreshLayout = mCharactersFragmentView.findViewById(R.id.swipe_to_refresh);
+            mContentLoadingProgress = mCharactersFragmentView.findViewById(R.id.progress);
+            mMessageLayout = mCharactersFragmentView.findViewById(R.id.message_layout);
+
+            mPresenter = new CharactersPresenter<>(AppDataManager.getInstance());
+            mPresenter.onAttach(this);
         }
-        charactersFragment = inflater.inflate(R.layout.fragment_home_second_container1, container, false);
-
-        charactersRecyclerView = charactersFragment.findViewById(R.id.recyclerView_characters_homesecond);
-        mSwipeRefreshLayout = charactersFragment.findViewById(R.id.swipe_to_refresh);
-        mContentLoadingProgress = charactersFragment.findViewById(R.id.progress);
-        mMessageLayout = charactersFragment.findViewById(R.id.message_layout);
-
-        mPresenter = new CharactersPresenter<>(AppDataManager.getInstance());
-        mPresenter.onAttach(this);
-
-        return charactersFragment;
+        return mCharactersFragmentView;
     }
 
     @Override
@@ -71,13 +69,13 @@ public class CharactersFragment extends BaseFragment implements CharactersMvpVie
             mAdapter = new CharactersAdapter(new ArrayList<CharacterDto>(0));
             mPresenter.onViewPrepared();
         }
-        charactersRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        mCharactersRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
         mAdapter.setCallback(this);
 
-        charactersRecyclerView.setAdapter(mAdapter);
-        charactersRecyclerView.addOnScrollListener(setupScrollListener(charactersRecyclerView.getLayoutManager()));
-        charactersRecyclerView.setHasFixedSize(true);
+        mCharactersRecyclerView.setAdapter(mAdapter);
+        mCharactersRecyclerView.addOnScrollListener(setupScrollListener(mCharactersRecyclerView.getLayoutManager()));
+        mCharactersRecyclerView.setHasFixedSize(true);
 
         mSwipeRefreshLayout.setProgressBackgroundColorSchemeResource(R.color.colorPrimaryDark);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
@@ -88,7 +86,7 @@ public class CharactersFragment extends BaseFragment implements CharactersMvpVie
         return new EndlessOnScrollListener((LinearLayoutManager) layoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount) {
-                if (mAdapter.addLoadingView(charactersRecyclerView)) {
+                if (mAdapter.addLoadingView(mCharactersRecyclerView)) {
                     mPresenter.onListEndReached(totalItemsCount, null);
                 }
             }
@@ -113,16 +111,16 @@ public class CharactersFragment extends BaseFragment implements CharactersMvpVie
     @Override
     public void showMessageLayout(boolean show) {
         mMessageLayout.setVisibility(show ? View.VISIBLE : View.GONE);
-        charactersRecyclerView.setVisibility(show ? View.GONE : View.VISIBLE);
+        mCharactersRecyclerView.setVisibility(show ? View.GONE : View.VISIBLE);
     }
 
     @Override
     public void updateCharacters(List<CharacterDto> characterList) {
 //        mAdapter.updateMarvelCharacters(characterList);
-        if (mAdapter.getViewType() != CharactersAdapter.VIEW_TYPE_LIST) {
-            mAdapter.removeAll();
-            mAdapter.setViewType(CharactersAdapter.VIEW_TYPE_LIST);
-        }
+//        if (mAdapter.getViewType() != CharactersAdapter.VIEW_TYPE_LIST) {
+//            mAdapter.removeAll();
+//            mAdapter.setViewType(CharactersAdapter.VIEW_TYPE_LIST);
+//        }
 
         if (!mSwipeRefreshLayout.isActivated()) {
             mSwipeRefreshLayout.setEnabled(true);
@@ -132,8 +130,8 @@ public class CharactersFragment extends BaseFragment implements CharactersMvpVie
 
 
     @Override
-    public void onCharacterViewClick(String text) {
-        Toast.makeText(getContext(), text + " was clicked", Toast.LENGTH_SHORT).show();
+    public void onCharacterViewClick(CharacterDto character) {
+        getMainActivity().getmNavController().pushFragment(CharacterDetailFragment.newInstance(character));
     }
 
     @Override
@@ -142,4 +140,9 @@ public class CharactersFragment extends BaseFragment implements CharactersMvpVie
         mPresenter.onViewPrepared();
     }
 
+    @Override
+    public void onDestroy() {
+//        mPresenter.onDetach();
+        super.onDestroy();
+    }
 }

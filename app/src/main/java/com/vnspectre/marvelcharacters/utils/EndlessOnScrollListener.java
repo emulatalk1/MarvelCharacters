@@ -28,45 +28,48 @@ public abstract class EndlessOnScrollListener extends RecyclerView.OnScrollListe
         mLayoutManager = layoutManager;
     }
 
-    public EndlessOnScrollListener(GridLayoutManager layoutManager) {
-        mLayoutManager = layoutManager;
-        sVisibleThreshold = sVisibleThreshold * layoutManager.getSpanCount();
-    }
-
-    public EndlessOnScrollListener(StaggeredGridLayoutManager layoutManager) {
-        mLayoutManager = layoutManager;
-        sVisibleThreshold = sVisibleThreshold * layoutManager.getSpanCount();
-    }
-
-    public int getLastVisibleItem(int[] lastVisibleItemPositions) {
-        int maxSize = 0;
-        for (int i = 0; i < lastVisibleItemPositions.length; i++) {
-            if (i == 0) {
-                maxSize = lastVisibleItemPositions[i];
-            } else if (lastVisibleItemPositions[i] > maxSize) {
-                maxSize = lastVisibleItemPositions[i];
-            }
-        }
-        return maxSize;
-    }
+//    public EndlessOnScrollListener(GridLayoutManager layoutManager) {
+//        mLayoutManager = layoutManager;
+//        sVisibleThreshold = sVisibleThreshold * layoutManager.getSpanCount();
+//    }
+//
+//    public EndlessOnScrollListener(StaggeredGridLayoutManager layoutManager) {
+//        mLayoutManager = layoutManager;
+//        sVisibleThreshold = sVisibleThreshold * layoutManager.getSpanCount();
+//    }
+//
+//    public int getLastVisibleItem(int[] lastVisibleItemPositions) {
+//        int maxSize = 0;
+//        for (int i = 0; i < lastVisibleItemPositions.length; i++) {
+//            if (i == 0) {
+//                maxSize = lastVisibleItemPositions[i];
+//            } else if (lastVisibleItemPositions[i] > maxSize) {
+//                maxSize = lastVisibleItemPositions[i];
+//            }
+//        }
+//        return maxSize;
+//    }
 
     @Override
     public void onScrolled(RecyclerView view, int dx, int dy) {
         int lastVisibleItemPosition = 0;
         int totalItemCount = mLayoutManager.getItemCount();
 
-        if (mLayoutManager instanceof StaggeredGridLayoutManager) {
-            int[] lastVisibleItemPositions = ((StaggeredGridLayoutManager) mLayoutManager)
-                    .findLastVisibleItemPositions(null);
-            lastVisibleItemPosition = getLastVisibleItem(lastVisibleItemPositions);
+        lastVisibleItemPosition = ((LinearLayoutManager) mLayoutManager)
+                .findLastVisibleItemPosition();
 
-        } else if (mLayoutManager instanceof LinearLayoutManager) {
-            lastVisibleItemPosition = ((LinearLayoutManager) mLayoutManager)
-                    .findLastVisibleItemPosition();
-
-        } else if (mLayoutManager instanceof GridLayoutManager) {
-            lastVisibleItemPosition = ((GridLayoutManager) mLayoutManager).findLastVisibleItemPosition();
-        }
+//        if (mLayoutManager instanceof StaggeredGridLayoutManager) {
+//            int[] lastVisibleItemPositions = ((StaggeredGridLayoutManager) mLayoutManager)
+//                    .findLastVisibleItemPositions(null);
+//            lastVisibleItemPosition = getLastVisibleItem(lastVisibleItemPositions);
+//
+//        } else if (mLayoutManager instanceof LinearLayoutManager) {
+//            lastVisibleItemPosition = ((LinearLayoutManager) mLayoutManager)
+//                    .findLastVisibleItemPosition();
+//
+//        } else if (mLayoutManager instanceof GridLayoutManager) {
+//            lastVisibleItemPosition = ((GridLayoutManager) mLayoutManager).findLastVisibleItemPosition();
+//        }
 
 
         if (totalItemCount < mPreviousTotalItemCount) { // List was cleared
@@ -82,7 +85,7 @@ public abstract class EndlessOnScrollListener extends RecyclerView.OnScrollListe
          * changed, if so we conclude it has finished loading and update the current page
          * number and total item count (+ 1 due to loading view being added).
          */
-        if (mLoading && (totalItemCount > mPreviousTotalItemCount + 1)) {
+        if (mLoading && (totalItemCount > mPreviousTotalItemCount)) {
             mLoading = false;
             mPreviousTotalItemCount = totalItemCount;
         }
