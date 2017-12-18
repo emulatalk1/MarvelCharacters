@@ -9,5 +9,5 @@ import com.vnspectre.marvelcharacters.ui.base.MvpView;
 
 public interface CharacterDetailMvpView extends MvpView {
     CharacterDto getCharacter();
-    void updateView(String characterCoverImage, String characterProfilePhoto, String characterName);
+    void updateView(String characterCoverImage, String characterProfilePhoto, String characterName, String characterDes);
 }

@@ -1,8 +1,10 @@
 package com.vnspectre.marvelcharacters.ui.detail.characters;
 
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,8 +33,11 @@ public class CharacterDetailFragment extends BaseFragment implements CharacterDe
 
     private ImageView mHeaderCoverImage;
     private ImageView mCharacterProfilePhoto;
-    private TextView mCharacterProfileName;
-//    private TextView mCharacterProfileDes;
+//    private TextView mCharacterProfileName;
+    private TextView mCharacterProfileDes;
+
+    private CollapsingToolbarLayout mCollapsingToolbar;
+    private Toolbar mToolbar;
 
     private CharacterDetailPagerAdapter mPagerAdapter;
     private ViewPager mViewPager;
@@ -58,8 +63,14 @@ public class CharacterDetailFragment extends BaseFragment implements CharacterDe
 
             mHeaderCoverImage = mCharacterDetailFragment.findViewById(R.id.header_cover_image);
             mCharacterProfilePhoto = mCharacterDetailFragment.findViewById(R.id.character_profile_photo);
-            mCharacterProfileName = mCharacterDetailFragment.findViewById(R.id.character_profile_name);
-//            mCharacterProfileDes = mCharacterDetailFragment.findViewById(R.id.character_profile_des);
+//            mCharacterProfileName = mCharacterDetailFragment.findViewById(R.id.character_profile_name);
+            mCharacterProfileDes = mCharacterDetailFragment.findViewById(R.id.character_profile_des);
+
+            mCollapsingToolbar = mCharacterDetailFragment.findViewById(R.id.collapsing_toolbar);
+            mToolbar = mCharacterDetailFragment.findViewById(R.id.toolbar);
+
+            getMainActivity().setSupportActionBar(mToolbar);
+            getMainActivity().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
             mPagerAdapter = new CharacterDetailPagerAdapter(getChildFragmentManager());
             mViewPager = mCharacterDetailFragment.findViewById(R.id.detail_view_pager);
@@ -121,14 +132,16 @@ public class CharacterDetailFragment extends BaseFragment implements CharacterDe
     }
 
     @Override
-    public void updateView(String characterCoverImage, String characterProfilePhoto, String characterName) {
+    public void updateView(String characterCoverImage, String characterProfilePhoto, String characterName, String characterDes) {
         Picasso.with(mHeaderCoverImage.getContext()).load(characterCoverImage).into(mHeaderCoverImage);
         Picasso.with(mCharacterProfilePhoto.getContext())
                 .load(characterProfilePhoto)
                 .transform(new CircleTransform())
                 .into(mCharacterProfilePhoto);
-        mCharacterProfileName.setText(characterName);
-//        mCharacterProfileDes.setText(characterDes);
+        //mCharacterProfileName.setText(characterName);
+
+        mCollapsingToolbar.setTitle(characterName);
+        mCharacterProfileDes.setText(characterDes);
     }
 
 

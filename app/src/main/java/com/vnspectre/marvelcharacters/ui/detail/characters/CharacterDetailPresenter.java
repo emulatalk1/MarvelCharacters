@@ -24,7 +24,8 @@ public class CharacterDetailPresenter<V extends CharacterDetailMvpView> extends 
         getMvpView().updateView(
                 character.getThumbnail().getImageUrl(LANDSCAPE_INCREDIBLE),
                 character.getThumbnail().getImageUrl(PORTRAIT_XLARGE),
-                character.getName());
+                character.getName(),
+                character.getDescription());
 //                character.getDescription());
     }
 
